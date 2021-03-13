@@ -30,7 +30,7 @@ module.exports = {
   postLogin: (body) => {
     return new Promise((resolve, reject) => {
       const { email, password } = body;
-      const qs = "SELECT password, id, email ,fullname FROM users WHERE email=? ";
+      const qs = "SELECT password, id, email ,fullname, phone_number FROM users WHERE email=? ";
 
       db.query(qs, [email], (err, data) => {
         if (err) {
@@ -70,7 +70,8 @@ module.exports = {
               resolve({
                 id: data[0].id,
                 email: data[0].email,
-                fullname: data[0].username,
+                fullname: data[0].fullname,
+                phone_number: data[0].phone_number,
                 token,
               });
             }
